@@ -18,7 +18,7 @@ class Battery extends Component  {
     theApp.circuit.addNewBranch(this);   
   }
     
-    CanvasRenderingContext2D drawComponent(CanvasRenderingContext2D ctx) {
+    void drawComponent(CanvasRenderingContext2D ctx) {
       iw = img.width / 3;
       ih = img.height / 3;
       ctx.drawImageScaled(img, -iw/2, -ih/2, iw, ih);
@@ -37,7 +37,6 @@ class Battery extends Component  {
        num warningH = warning.height / 2.5;
        ctx.drawImageScaled(warning, -iw/3.7, -ih/2, warningW, warningH);
      }
-     return ctx;
     }
     /** burn the battery because of a short circuit.
      * I(short circuit) > 5.0

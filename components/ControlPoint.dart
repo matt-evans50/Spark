@@ -20,7 +20,6 @@ class ControlPoint implements Touchable {
     beforeDragConnections = new List<ControlPoint>();  
   }
 
-
   bool get isConnected => connections.length > 0;
 
 
@@ -54,7 +53,7 @@ class ControlPoint implements Touchable {
   void makeConnection() {
     ControlPoint p = this.findConnection();
     
-    /* make a connection, if any, but don't connect if it is connecting two components together */    
+    /* make a connection, if any, but don't connect if it is connecting two components together */
     if (p != null && !p.myConjoint.connections.contains(this.myConjoint)) {
       for (ControlPoint cp in p.connections) {
         if (cp.myConjoint.connections.contains(this.myConjoint)) return;
@@ -65,6 +64,7 @@ class ControlPoint implements Touchable {
     }
   }
 
+  
   ControlPoint findConnection () {
     for (ControlPoint cp in theApp.controlPoints) {
       if (isOverlapping(cp) && cp != this) return cp;
@@ -161,7 +161,6 @@ class ControlPoint implements Touchable {
     beforeDragConnections.clear();
     beforeDragConnections.addAll(connections); /* a copy of connections before the drag */
     clearConnections();
-    
     //App.repaint();
     return true;
   }
@@ -175,15 +174,14 @@ class ControlPoint implements Touchable {
   }
 
   void touchDrag(Contact event) {
-    
+    dragging = true;
     if (myComponent is Wire) {
       var dist = (event.touchX - myConjoint.x)*(event.touchX - myConjoint.x) + (event.touchY - myConjoint.y)*(event.touchY - myConjoint.y);
-      if (dist > 40 * 40) { /* don't let the wire length to become less than 40 */
+      if (dist > 40 * 40) { //don't let the wire length to become less than 40 
       x = event.touchX;
       y = event.touchY;
       }
     } 
-    
     else {
       num x1 = myConjoint.x;
       num y1 = myConjoint.y;

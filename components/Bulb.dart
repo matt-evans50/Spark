@@ -36,7 +36,7 @@ class Bulb extends Component  {
     isOn = false;
   }
   
-  CanvasRenderingContext2D drawComponent(CanvasRenderingContext2D ctx) {
+  void drawComponent(CanvasRenderingContext2D ctx) {
     iw = img.width / 2.2;
     ih = img.height / 2.2;
     
@@ -56,7 +56,6 @@ class Bulb extends Component  {
     ctx.drawImageScaled(onbulb, -iw/2, -ih, iw, ih);
     ctx.globalAlpha = 1.0;
     //ctx.drawImageScaled(coil, -coilW/2, -coilH - 3, coilW, coilH);
-    return ctx;
     }
     
   bool containsTouch(Contact event) {
