@@ -81,12 +81,12 @@ class Circuit {
       if (!(c is Battery))
        { c.voltageDrop = c.resistance * c.current; }
       if (c is Bulb) {
-        if (c.current != 0.0 && !(c as Bulb).isOn) (c as Bulb).turnOn();
-        if (c.current == 0.0 && (c as Bulb).isOn) (c as Bulb).turnOff();
+        if (c.current != 0.0 && !c.isOn) c.turnOn();
+        if (c.current == 0.0 && c.isOn) c.turnOff();
       }
       if (c is Battery && c.current > maxCurrent) { // a short circuit
-        (c as Battery).burn(); 
-        burntBatteries.add(c as Battery);        
+        c.burn(); 
+        burntBatteries.add(c);        
       }
     }
   }
