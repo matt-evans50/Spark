@@ -9,13 +9,15 @@ class Model {
   Component component;
    
   Model(this.app, String id) {
-    
+    //theApp.help.show();
     ButtonElement button;
     button = document.querySelector("$id .close-button");
     if (button != null) button.onClick.listen((e) => closeModel());
     
     button = document.querySelector("$id .help-button");
+    //if (button != null) button.style.display = "none";
     if (button != null) button.onClick.listen((e) => theApp.help.show());
+    
     
   }
   

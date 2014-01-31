@@ -24,7 +24,7 @@ void genericSliderTouch(TouchEvent tframe) {
   } else {
     slider.value = (min + 4 * step).toString();
   }
-  genericChangeValue(int.parse(slider.value));
+  genericChangeValue(double.parse(slider.value));
 
 }
 

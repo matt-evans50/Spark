@@ -28,7 +28,7 @@ class Help implements Touchable {
       ctx.translate(this.x, this.y);
       iw = img.width / 2.5;
       ih = img.height / 2.5;
-      ctx.drawImageScaled(theApp.help.img, 200, -200, iw, ih);
+      ctx.drawImageScaled(theApp.help.img, 5, 0, iw, ih);
       ctx.restore();
     }
   }

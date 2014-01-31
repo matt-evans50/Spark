@@ -106,7 +106,7 @@ class App extends TouchManager {
 
      
      lens = new Lens(690, 690);
-     help = new Help(1100, 520);
+     help = new Help(1100, 420);
 
      ARTagCounter = 0;
      gridsOn = false;
@@ -182,7 +182,7 @@ class App extends TouchManager {
 //     ctx.font = '34px sans-serif'; /* other fonts: verdana */
 //     ctx.fillText("SPARK", 20, 20);
      
-     ctx.strokeStyle = 'white';
+     ctx.strokeStyle = 'black';
      
 //     ctx.strokeRect(0, 0, canvas.width, canvas.height);
 //     ctx.fillRect(0, 0, canvas.width, canvas.height);
