@@ -24,7 +24,7 @@ class Toolbar {
     if (button != null) {
       CssRect rect = button.borderEdge;
       button.onMouseDown.listen((evt) => createComponent(rect, "Battery"));
-      //button.onTouchStart.listen((evt) => createComponent(rect, "Battery"));
+      button.onTouchStart.listen((evt) => createComponent(rect, "Battery"));
       //button.onTouchMove.listen((e) => createComponent(rect, "Battery"));
       //button.onMouseDown.listen((e) => window.onMouseUp.listen((evt) => createComponent(rect, "Battery")));
       
@@ -35,25 +35,25 @@ class Toolbar {
     if (button != null) {
       CssRect rect = button.borderEdge;
       button.onMouseDown.listen((evt) => createComponent(rect, "Wire"));
-      //button.onTouchStart.listen((evt) => createComponent(rect, "Wire"));
+      button.onTouchStart.listen((evt) => createComponent(rect, "Wire"));
     }
     
     button = document.querySelector("$id #resistor-button");
     if (button != null) {
       CssRect rect = button.borderEdge;
       button.onMouseDown.listen((evt) => createComponent(rect, "Resistor"));
-      //button.onTouchStart.listen((evt) => createComponent(rect, "Resistor"));
+      button.onTouchStart.listen((evt) => createComponent(rect, "Resistor"));
     }
     
     button = document.querySelector("$id #bulb-button");
     if (button != null) {
       CssRect rect = button.borderEdge;
       button.onMouseDown.listen((evt) => createComponent(rect, "Bulb"));
-      //button.onTouchStart.listen((evt) => createComponent(rect, "Bulb"));
+      button.onTouchStart.listen((evt) => createComponent(rect, "Bulb"));
     }
     
-//    button = document.querySelector("$id #grid-button");
-//    if (button != null) button.onClick.listen((evt) => switchMode());
+    button = document.querySelector("$id #grid-button");
+    if (button != null) button.onClick.listen((evt) => switchMode());
     
     button = document.querySelector("$id #reset-button");
     if (button != null) button.onClick.listen((evt) => this.app.reset());
@@ -66,7 +66,7 @@ class Toolbar {
     InputElement slider1 = document.querySelector("#battery-slider");
     if (slider1 != null) {
       changeValue("battery-value", double.parse(slider1.value)); /* initiate the slider value */
-      slider1.onChange.listen((e) => changeValue("battery-value", double.parse(slider1.value)));
+      //slider1.onChange.listen((e) => changeValue("battery-value", double.parse(slider1.value)));
       slider1.onTouchMove.listen((e) => sliderTouch(e, "#battery-slider"));
       slider1.onTouchEnd.listen((e) => changeValue("battery-value", double.parse(slider1.value)));
     }
@@ -80,7 +80,7 @@ class Toolbar {
     InputElement slider3 = document.querySelector("#resistor-slider");
     if (slider3 != null) {
     changeValue("resistor-value", double.parse(slider3.value));
-    slider3.onChange.listen((evt) => changeValue("resistor-value", double.parse(slider3.value)));
+    //slider3.onChange.listen((evt) => changeValue("resistor-value", double.parse(slider3.value)));
     slider3.onTouchMove.listen((e) => sliderTouch(e, "#resistor-slider"));
     slider3.onTouchEnd.listen((e) => changeValue("resistor-value", double.parse(slider3.value)));
     }
@@ -167,8 +167,6 @@ void sliderTouch(TouchEvent tframe, String who) {
   } else {
     slider.value = "3.0";
   }
-  
-  //changeValue(valueWho, slider.value);
 
 }
 

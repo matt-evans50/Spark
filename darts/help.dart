@@ -55,7 +55,7 @@ class Help implements Touchable {
   }
   
   void next() {
-    if (number != 3) {
+    if (number != 4) {
       number++;
       img.src = "images/helps/help${number.toString()}.png";
     }
@@ -106,7 +106,6 @@ class Help implements Touchable {
   void touchUp(Contact event){
     /* if it is clicked, take an action if the click is on a button */
     if (clickX == event.touchX && clickY == event.touchY) {
-      print("elham");
       /* is it on next? */
       if (clickX > (x + 0.8 * iw) && clickX <= (x + iw) && clickY > (y + 0.8 * ih) && clickY <= (y + ih)) {
         this.next();

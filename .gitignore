@@ -4,3 +4,10 @@ obj
 
 # mstest test results
 TestResults
+
+*.dart.js
+*.dart.js.deps
+*.dart.js.map
+*.precompiled.js
+part.js
+part.js.map

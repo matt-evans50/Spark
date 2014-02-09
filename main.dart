@@ -31,6 +31,10 @@ part 'components/Battery.dart';
 part 'components/Resistor.dart';
 part 'components/Bulb.dart';
 
+
+
+part 'test/test.dart';
+
 App theApp;
 
 
@@ -45,7 +49,7 @@ void main() {
     /* update the valuse of the generic slider, whenever it is changed */
     InputElement slider = document.querySelector("#generic-slider");
     if (slider != null) {
-      slider.onChange.listen((e) => genericChangeValue(double.parse(slider.value)));
+      //slider.onChange.listen((e) => genericChangeValue(double.parse(slider.value)));
       slider.onTouchMove.listen((e) => genericSliderTouch(e));
       slider.onTouchEnd.listen((e) => genericChangeValue(double.parse(slider.value)));
     }
@@ -106,7 +110,7 @@ class App extends TouchManager {
 
      
      lens = new Lens(690, 690);
-     help = new Help(1100, 420);
+     help = new Help(1100, 520);
 
      ARTagCounter = 0;
      gridsOn = false;
@@ -182,7 +186,7 @@ class App extends TouchManager {
 //     ctx.font = '34px sans-serif'; /* other fonts: verdana */
 //     ctx.fillText("SPARK", 20, 20);
      
-     ctx.strokeStyle = 'black';
+     ctx.strokeStyle = 'white';
      
 //     ctx.strokeRect(0, 0, canvas.width, canvas.height);
 //     ctx.fillRect(0, 0, canvas.width, canvas.height);

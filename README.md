@@ -1,4 +1,4 @@
-Spark
-=====
+ComputerMuseum
+==============
 
-Agent-based electrical circuit environment.
+Tangible programming exhibit for the Computer History Museum

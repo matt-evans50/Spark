@@ -1,0 +1,7 @@
+name: SPARKModels
+description: A sample web application
+dependencies:
+  browser: any
+  web_ui: any
+dev_dependencies:
+  intl: any

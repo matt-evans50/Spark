@@ -9,15 +9,13 @@ class Model {
   Component component;
    
   Model(this.app, String id) {
-    //theApp.help.show();
+    
     ButtonElement button;
     button = document.querySelector("$id .close-button");
     if (button != null) button.onClick.listen((e) => closeModel());
     
     button = document.querySelector("$id .help-button");
-    //if (button != null) button.style.display = "none";
     if (button != null) button.onClick.listen((e) => theApp.help.show());
-    
     
   }
   
@@ -35,9 +33,11 @@ class Model {
     String v = c.voltageDrop.toString();
     
     IFrameElement frame = document.querySelector("div#model1 #model-frame");
-//    frame.width = "50";
-//    frame.height = "50";
-    frame.src = "probe.html?i=${i}&r=${r}&v=${v}&type=${c.type}";
+//    if (c is Wire) frame.src = "models/wire.html?i=${i}&r=${r}&v=${v}";
+//    else frame.src = "models/resistor.html?i=${i}&r=${r}&v=${v}";
+    if (c is Wire) frame.src = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
+    else frame.src = "http://spark-project.appspot.com/Resistor?i=${i}&r=${r}&v=${v}";
+    //frame.src = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
     
     document.querySelector("#model1").style.display = "block";
     theApp.help.initiate();
@@ -52,11 +52,16 @@ class Model {
       String i = c.current.toString();
       String r = c.resistance.toString();
       String v = c.voltageDrop.toString();
-      
+      //frame.src = "http://spark-project.appspot.com/Resistor?i=${i}&r=${r}&v=${v}";
       IFrameElement frame = document.querySelector("div#model1 #model-frame");
       String frameSource;
-      frameSource = "probe.html?i=${i}&r=${r}&v=${v}&type=${c.type}";
-      //print(frame.src);
+      if (c is Wire) {
+        frameSource = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
+      }
+      else { // resistor or bulb
+        frameSource = "http://spark-project.appspot.com/Resistor?i=${i}&r=${r}&v=${v}";
+      }
+      print(frame.src);
       if (!frame.src.endsWith(frameSource)) frame.src = frameSource; // update only if it is updated!
     }
   }

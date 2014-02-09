@@ -135,17 +135,17 @@ class Component implements Touchable {
 //    if (theApp.model1.component == this) {
 //      ctx.drawImageScaled(eyeImg, -15, 15 , 30, 30);   
 //    }
-/*   
+/*    
     if (this.type != "Battery") {
-    ctx.drawImage(ARImg, -23, 25); // ARImg is 46 by 46px -> 46/2 
-    // draw the text inside the Frame
+    ctx.drawImage(ARImg, -23, 25); /* ARImg is 46 by 46px -> 46/2 */
+    /* draw the text inside the Frame */
     ctx.fillStyle = "rgba(0,250,0,1)";
     ctx.textAlign = 'center';
     ctx.textBaseline = 'bottom';
-    ctx.font = '8px sans-serif'; 
+    ctx.font = '8px sans-serif'; /* other fonts: verdana */
     ctx.fillText(this.type, 0, 48);   
     ctx.textBaseline = 'top';
-    var txt; // text inside the frame
+    var txt; /* text inside the frame */
     switch (type) {
       case 'Battery':
         txt = " V = ${this.voltageDrop}";
@@ -170,7 +170,7 @@ class Component implements Touchable {
     end.draw(ctx);
   }
   
-  void drawComponent(CanvasRenderingContext2D ctx) {}
+  CanvasRenderingContext2D drawComponent(CanvasRenderingContext2D ctx) {}
 
 /*
   void animate() {
@@ -336,7 +336,7 @@ class Component implements Touchable {
       clickX = event.touchX;
       clickY = event.touchY;
       
-      App.repaint();
+      //App.repaint();
       return true;
   }
 

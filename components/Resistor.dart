@@ -15,7 +15,7 @@ class Resistor extends Component {
     theApp.circuit.addNewBranch(this); 
   }
   
-  void drawComponent(CanvasRenderingContext2D ctx) {
+  CanvasRenderingContext2D drawComponent(CanvasRenderingContext2D ctx) {
     iw = img.width / 4;
     ih = img.height / 4;
     ctx.drawImageScaled(img, -iw/2, -ih/2, iw, ih);
@@ -27,5 +27,7 @@ class Resistor extends Component {
     ctx.font = '12px sans-serif'; /* other fonts: verdana */
     
     ctx.fillText("R = ${resistance}", -20,-22);
+
+    return ctx;
     }
 }

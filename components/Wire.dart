@@ -13,9 +13,10 @@ class Wire extends Component {
     theApp.circuit.addNewBranch(this); 
     }
   
-  void drawComponent(CanvasRenderingContext2D ctx) {
+  CanvasRenderingContext2D drawComponent(CanvasRenderingContext2D ctx) {
     iw = sqrt(pow((start.x - end.x), 2) + pow((start.y - end.y), 2));
     ih = img.height / 3;
     /* no image to be drawn */
+    return ctx;
     }
 }
