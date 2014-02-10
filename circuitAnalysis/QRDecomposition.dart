@@ -1,18 +1,36 @@
-/** QR Decomposition.
-<P>
-   For an m-by-n matrix A with m >= n, the QR decomposition is an m-by-n
-   orthogonal matrix Q and an n-by-n upper triangular matrix R so that
-   A = Q*R.
-<P>
-   The QR decompostion always exists, even if the matrix does not have
-   full rank, so the constructor will never fail.  The primary use of the
-   QR decomposition is in the least squares solution of nonsquare systems
-   of simultaneous linear equations.  This will fail if isFullRank()
-   returns false.
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 
 part of SparkProject;
 
+/** QR Decomposition.
+ * For an m-by-n matrix A with m >= n, the QR decomposition is an m-by-n
+ * orthogonal matrix Q and an n-by-n upper triangular matrix R so that
+ * A = Q*R.
+ * The QR decompostion always exists, even if the matrix does not have
+ * full rank, so the constructor will never fail.  The primary use of the
+ * QR decomposition is in the least squares solution of nonsquare systems
+ * of simultaneous linear equations.  This will fail if isFullRank()
+ * returns false.
+*/
 class QRDecomposition{
 
 /* ------------------------
@@ -214,7 +232,6 @@ class QRDecomposition{
             }
          }
       }
-      //ELHAM'S CODE
       // BECAUSE I DON'T HAVE A CONSTRUCTUR WITH ARRAY A AS ONE OF IT'S ARGUMENTS
       Matrix R = new Matrix(n,nx);
       R.A = X; 

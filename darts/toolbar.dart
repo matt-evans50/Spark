@@ -1,3 +1,23 @@
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
 
 part of SparkProject;
 
@@ -18,16 +38,12 @@ class Toolbar {
     num h = app.height;
     
     ButtonElement button;
-    //InputElement slider;
     
     button = document.querySelector("$id #battery-button");
     if (button != null) {
       CssRect rect = button.borderEdge;
       button.onMouseDown.listen((evt) => createComponent(rect, "Battery"));
       button.onTouchStart.listen((evt) => createComponent(rect, "Battery"));
-      //button.onTouchMove.listen((e) => createComponent(rect, "Battery"));
-      //button.onMouseDown.listen((e) => window.onMouseUp.listen((evt) => createComponent(rect, "Battery")));
-      
       
     }
   
@@ -51,18 +67,11 @@ class Toolbar {
       button.onMouseDown.listen((evt) => createComponent(rect, "Bulb"));
       button.onTouchStart.listen((evt) => createComponent(rect, "Bulb"));
     }
-    
-    button = document.querySelector("$id #grid-button");
-    if (button != null) button.onClick.listen((evt) => switchMode());
-    
+      
     button = document.querySelector("$id #reset-button");
     if (button != null) button.onClick.listen((evt) => this.app.reset());
-     
-//    button = document.querySelector("$id #help-button");
-//    if (button != null) button.onClick.listen((evt) => this.app.help.show());
-//     
-    
-    /* update the valuse of sliders, whenever it is changed */
+      
+    /* update the values of sliders, whenever it is changed */
     InputElement slider1 = document.querySelector("#battery-slider");
     if (slider1 != null) {
       changeValue("battery-value", double.parse(slider1.value)); /* initiate the slider value */
@@ -94,21 +103,6 @@ class Toolbar {
     }
   }
   
-  void test(Rectangle rect, Event e) {
-    e.stopImmediatePropagation();
-    window.onMouseUp.listen((evt) => createComponent(rect, "Battery"));
-    
-    print('stop please');
-  }
-  
-
-  void switchMode () {
-   app.gridsOn == true ? app.gridsOn = false : app.gridsOn = true;
-   App.repaint();
-   //print(this.app.gridsOn);
-    
-  }
-  
   void createComponent(CssRect rect, String type) {
     num cx = rect.left + rect.width / 2 + rand.nextInt(24) - 12;
     num cy = rect.top + rect.height / 2 - rand.nextInt(24);
@@ -134,21 +128,9 @@ class Toolbar {
         break;
     }
   }
-
-/*  
-  void createWire(num w, num h) {
-    num ex = App.rnd.nextInt(w - 100);
-    num ey = App.rnd.nextInt(h - 150);
-    theApp.components.add(new Wire(ex, ey, ex + 100, ey)); 
-  }
-*/  
-
 }
 
 void sliderTouch(TouchEvent tframe, String who) {
-//    String who = c + "-slider";
-//    String value = c + "-value";
-//    print(value);
   InputElement slider = document.querySelector(who);
   Rectangle box = slider.getBoundingClientRect();
   num left = box.left + window.pageXOffset;
@@ -167,7 +149,6 @@ void sliderTouch(TouchEvent tframe, String who) {
   } else {
     slider.value = "3.0";
   }
-
 }
 
 void changeValue(String who, num value) {

@@ -1,28 +1,45 @@
-   /** LU Decomposition.
-   <P>
-   For an m-by-n matrix A with m >= n, the LU decomposition is an m-by-n
-   unit lower triangular matrix L, an n-by-n upper triangular matrix U,
-   and a permutation vector piv of length m so that A(piv,:) = L*U.
-   If m < n, then L is m-by-m and U is m-by-n.
-   <P>
-   The LU decompostion with pivoting always exists, even if the matrix is
-   singular, so the constructor will never fail.  The primary use of the
-   LU decomposition is in the solution of square systems of simultaneous
-   linear equations.  This will fail if isNonsingular() returns false.
-   
-   
-   (Elham) List of Methods:
-   * isNonsingular ()
-   * getL ()
-   * getU ()
-   * getPivot ()
-   * getDoublePivot ()
-   * det ()
-   * solve (Matrix B)
-   */
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
 
 part of SparkProject;
 
+/** LU Decomposition.
+ * For an m-by-n matrix A with m >= n, the LU decomposition is an m-by-n
+ * unit lower triangular matrix L, an n-by-n upper triangular matrix U,
+ * and a permutation vector piv of length m so that A(piv,:) = L*U.
+ * If m < n, then L is m-by-m and U is m-by-n.
+ * The LU decompostion with pivoting always exists, even if the matrix is
+ * singular, so the constructor will never fail.  The primary use of the
+ * LU decomposition is in the solution of square systems of simultaneous
+ * linear equations.  This will fail if isNonsingular() returns false.
+ * 
+ * List of Methods:
+ * isNonsingular ()
+ * getL ()
+ * getU ()
+ * getPivot ()
+ * getDoublePivot ()
+ * det ()
+ * solve (Matrix B)
+ */
 class LUDecomposition {
 
 /* ------------------------

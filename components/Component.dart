@@ -1,3 +1,24 @@
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+
 part of SparkProject;
 
 class Component implements Touchable {  
@@ -91,7 +112,6 @@ class Component implements Touchable {
     theApp.ARTagCounter++;
     var ARTagf = new NumberFormat("000").format(ARTag);
     ARImgSrc = "images/frame-markers-transparent/frameMarker_" + ARTagf.toString() + ".png";
-    //print(ARImgSrc);
     ARImg.src = ARImgSrc;
     ARImg.onLoad.listen((event) { App.repaint(); });
     
@@ -132,38 +152,6 @@ class Component implements Touchable {
       }
       else ctx.fillRect(-40, -30, 80, 60);
     }
-//    if (theApp.model1.component == this) {
-//      ctx.drawImageScaled(eyeImg, -15, 15 , 30, 30);   
-//    }
-/*    
-    if (this.type != "Battery") {
-    ctx.drawImage(ARImg, -23, 25); /* ARImg is 46 by 46px -> 46/2 */
-    /* draw the text inside the Frame */
-    ctx.fillStyle = "rgba(0,250,0,1)";
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'bottom';
-    ctx.font = '8px sans-serif'; /* other fonts: verdana */
-    ctx.fillText(this.type, 0, 48);   
-    ctx.textBaseline = 'top';
-    var txt; /* text inside the frame */
-    switch (type) {
-      case 'Battery':
-        txt = " V = ${this.voltageDrop}";
-        break;
-      case 'Wire':
-        txt = '';
-        break;
-      case 'Resistor':
-        txt = " R = ${this.resistance}";
-        break;
-      case 'Bulb':
-        //txt = " R = ${this.resistance}";
-        txt = "";
-        break;
-    }
-    ctx.fillText(txt, 0, 48);
-    }
-    */
     ctx.restore();
     
     start.draw(ctx);
@@ -172,12 +160,6 @@ class Component implements Touchable {
   
   CanvasRenderingContext2D drawComponent(CanvasRenderingContext2D ctx) {}
 
-/*
-  void animate() {
-    start.animate();
-    end.animate();
-  }
-*/  
   num screenToComponentX(num sx, num sy) {
 
     num mx = (start.x + end.x) / 2;
@@ -185,13 +167,12 @@ class Component implements Touchable {
     
     var vectorA = [sx-mx, sy-my];
     var vectorB = [start.x - mx, start.y - my];
-    /* find cx using the dot product of the two vectors */
+    // find cx using the dot product of the two vectors 
     num absA = sqrt(vectorA[0]*vectorA[0] + vectorA[1]*vectorA[1]);
     num absB = sqrt(vectorB[0]*vectorB[0] + vectorB[1]*vectorB[1]);
     num cosAlfa = (vectorA[0]*vectorB[0] + vectorA[1]*vectorB[1])/(absA*absB);
-    /* if cosAlfa > 0 => cx is negative, otherwise is positive */
+    // if cosAlfa > 0 => cx is negative, otherwise is positive 
     num cx = cosAlfa * absA;
-    //if (cosAlfa > 0) cx *= -1; 
     return (-cx);
   }
   
@@ -236,8 +217,6 @@ class Component implements Touchable {
   }
   
   bool inBox(num deltaX, num deltaY) {
-//    num mx = (start.x + end.x) / 2;
-//    num my = (start.y + end.y) / 2;
     if (start.x + deltaX < theApp.workingBox.width && start.y + deltaY < theApp.workingBox.height 
         && end.x + deltaX < theApp.workingBox.width  && end.y + deltaY < theApp.workingBox.height) {
       return true;
@@ -359,18 +338,11 @@ class Component implements Touchable {
     /* if the component is clicked, show the generic slider */
     if (clickX == event.touchX && clickY == event.touchY) {
       this.slider = document.querySelector("#generic-slider");
-//        if (this.slider.style.display == "block") {
-//          this.slider.style.display = "none";
-//        }
-//        else {
       if (this is Battery || this is Resistor) {
         this.slider.style.display = "block";
         setSlider();
         App.repaint(); 
-      }
-
-        //}
- 
+      } 
       return;
     }
     

@@ -1,13 +1,32 @@
-/* This is a Matrix Class that provides the fundamental operations of numerical linear algebra.
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+part of SparkProject;
+
+/** This is a Matrix Class that provides the fundamental operations of numerical linear algebra.
  * "get" and "set" provide access to matrix elements.  
  * Several methods implement basic matrix arithmetic, including matrix addition and 
  * multiplication, matrix norms, and element-by-element array operations.
  * Methods for reading and printing matrices are also included.  
  * All the operations in this version of the Matrix Class involve real matrices.
- * 
  */
-
-part of SparkProject;
 
 class Matrix {
 
@@ -69,7 +88,7 @@ class Matrix {
    @return     Pointer to the two-dimensional array of matrix elements.
    */
 
-   List<List<double>> getArray () { //CHECK THIS!!!!!
+   List<List<double>> getArray () { 
       return A;
    }
    
@@ -346,7 +365,7 @@ class Matrix {
    }
    
    /* ------------------------
-   Elham's Additional Methods
+   Additional Methods
  * ------------------------ */
    /** Generate 2D array of Zeros
    @param m    Number of rows.

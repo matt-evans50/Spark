@@ -25,16 +25,6 @@ class Sounds {
     AudioElement audio = new AudioElement();
     audio.src = "sounds/$name.wav";
     sounds[name] = audio;
-  
-/*
-    HttpRequest http = new HttpRequest();
-    http.responseType = "arraybuffer";
-    http.onLoad.listen((e) {
-      audio.decodeAudioData(http.response).then((buff) => sounds[name] = buff );
-    });
-    http.open('GET', "sounds/$name.wav");
-    http.send();
-    */
   }
 
 
@@ -44,17 +34,5 @@ class Sounds {
       sounds[name].volume = 0.4;
       sounds[name].play();
     }
-    
-/*
-    if (sounds[name] == null) return;
-    AudioBufferSourceNode source = audio.createBufferSource();
-    source.connectNode(audio.destination, 0, 0);
-    source.buffer = sounds[name];
-    source.loop = false;
-    source.gain.value = 0.2;
-    source.playbackRate.value = 1;
-    source.start(0);
-    */
   }
-
 }

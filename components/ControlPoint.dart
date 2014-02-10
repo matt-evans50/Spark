@@ -1,10 +1,30 @@
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+
 part of SparkProject;
 
 class ControlPoint implements Touchable {
 
   num x, y;
   bool dragging = false;
-  //double voltage;
   Component myComponent;
   ControlPoint myConjoint;
   List<ControlPoint> connections;
@@ -26,7 +46,6 @@ class ControlPoint implements Touchable {
 
   void draw(CanvasRenderingContext2D ctx) {
     ctx.beginPath();
-    //ctx.fillStyle = "gray";
     ctx.fillStyle = "red";
     if (isConnected) {
       ctx.fillStyle = "green";
@@ -35,17 +54,11 @@ class ControlPoint implements Touchable {
     }
     ctx.arc(x, y, 6, 0, PI * 2, true);
     ctx.fill();
-
     //ctx.save();
     ctx.arc(x, y, 10, 0, PI * 2, true);
     ctx.fillStyle = "rgba(255,255,255,0.5)";
     if (isConnected) ctx.fillStyle = "rgba(0,255,0,0.5)";
     ctx.fill();
-  }
-
-
-  void animate() {
-
   }
 
   /**
@@ -216,8 +229,6 @@ class ControlPoint implements Touchable {
   }
 
   void touchSlide(Contact event) {}
-  
-
 }
 
 /** split one node into two nodes and then remove the joint node
