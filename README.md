@@ -1,4 +1,4 @@
-ComputerMuseum
+Spark Project
 ==============
 
-Tangible programming exhibit for the Computer History Museum
+Agent-based circuit environment
