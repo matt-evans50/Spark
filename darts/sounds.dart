@@ -1,16 +1,23 @@
 /*
- * Green Home Games
- *
- * Michael S. Horn
- * Northwestern University
- * michael-horn@northwestern.edu
- * Copyright 2012, Michael S. Horn
- *
- * This project was funded in part by the National Science Foundation.
- * Any opinions, findings and conclusions or recommendations expressed in this
- * material are those of the author(s) and do not necessarily reflect the views
- * of the National Science Foundation (NSF).
- */
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
 part of SparkProject;
 
 
