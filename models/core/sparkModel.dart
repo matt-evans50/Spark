@@ -19,14 +19,17 @@
 * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 part of Spark;
-
+/**
+ * SparkModel extends the Model class in NetTango 
+ * which specifies properties for the electrical conduction model
+ */
 abstract class SparkModel extends Model { 
   
-  num initE;
-  num decE;
-  num incE;
+  num initE; // initial energy of the ions
+  num decE; // Ions' energies are decreased by decE at each tick
+  num incE; // Ions' energies are indreaces by incE after each collision
   
-  num voltage;
+  num voltage; // the force on electrons that moves them in an electric field
   var diameter;
   
   List<Ion> ions;
@@ -41,6 +44,8 @@ abstract class SparkModel extends Model {
     conductors = new List<Patch>();
   }
   
+  /** setup the model
+   */  
   void setup() {
     clearTurtles();
     initPatches();
@@ -49,7 +54,14 @@ abstract class SparkModel extends Model {
   
   void setupPatches();
   
-  void setupConductorPatch(int px, int py, num heading, String r) { // r is region (top, up, bottom, down)
+  /** setup the conductor patches
+   @param int px the x coordinate of a patch
+   @param int py the y coordinate of a path
+   @param num heading the direction of the force exerted by voltage 
+   @param String r the region where the patch is located (i.e., top, up, bottom, or down)
+   @return void
+   */    
+  void setupConductorPatch(int px, int py, num heading, String r) { 
     heading = heading * PI / 180.0 ;
     Patch patch = patchAt(px, py);
     conductors.add(patch);
@@ -58,19 +70,20 @@ abstract class SparkModel extends Model {
     patch.forceX = this.voltage * cos ( heading + PI / 2 );
     patch.forceY = this.voltage * sin ( heading + PI / 2 );
     patch.color.setColor(212, 212, 212, 50);
-    //patch.color.setColor(Model.rnd.nextInt(255), 0, 0, 50);
     
-    /* sprout electrons */
-    sproutIons();
-    
+    // sprout electrons 
     for (int i=0; i < 2; i++) {
       if (Model.rnd.nextDouble() > 0.7) {
         sproutElectron(px, py);
       }
-    }
-    
+    }    
   }
   
+  /** create electrons on conductor patches
+   @param int patchX the X coordinate of the patch
+   @param int patchY the Y coordinate of the patch
+   @return void 
+   */    
   void sproutElectron(int patchX, int patchY) {
       Electron electron = new Electron(this);
       electron.setXY(
@@ -83,6 +96,11 @@ abstract class SparkModel extends Model {
       electrons.add(electron);
   }
   
+  /** create ions on conductor patches
+   @param int patchX the X coordinate of the patch
+   @param int patchY the Y coordinate of the patch
+   @return void 
+   */    
   void sproutIon(int patchX, int patchY) {
     Ion ion = new Ion(this);
     ion.energy = 0.1;
@@ -91,8 +109,7 @@ abstract class SparkModel extends Model {
     ions.add(ion);
   }
   
-  void sproutIons() {}
-  
+/*  
   List<Patch> shuffle(List<Patch> ps) {
     List<Patch> shuffled = new List<Patch>();
     shuffled.addAll(ps);
@@ -111,6 +128,6 @@ abstract class SparkModel extends Model {
 
     return shuffled;
   }
-
+*/
 }
 

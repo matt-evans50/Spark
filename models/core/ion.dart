@@ -19,7 +19,9 @@
 * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 part of Spark;
-
+/**
+ * class for Turtles as stationary Ions
+ */
 class Ion extends Turtle {
   num energy;
   SparkModel sparkModel;

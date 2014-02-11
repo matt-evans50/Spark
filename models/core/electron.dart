@@ -19,13 +19,15 @@
 * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 */
 part of Spark;
-
+/**
+ * class for Turtles as moving Electrons
+ */
 class Electron extends Turtle {
   SparkModel sparkModel;
   num vx; // velocity in x direction
   num vy;
   
-  int diameter;
+  int diameter; // width of the conductor area
   
   Electron(SparkModel model) : super(model) {
     this.sparkModel = model;
@@ -37,6 +39,8 @@ class Electron extends Turtle {
     move();
   }
   
+  /** move the electrons with each model tick event
+   */   
   void move() {
     Ion i = ionHere();
     if (i == null) { /* no collision, continue */
@@ -53,35 +57,22 @@ class Electron extends Turtle {
     }
     
     Patch patchNext = model.patchAt(x + vx, y + vy);
-    if (!sparkModel.conductors.contains(patchNext)) {// if it is out of wire, wrap it.
+    // if it is out of wire, wrap the electron
+    if (!sparkModel.conductors.contains(patchNext)) {
       Patch patchHere = model.patchAt(x, y);
-      //wrapResistorElectrons();
-      
       if (this.sparkModel.name == 'Wire') wrapWireElectrons(patchHere);
-      else wrapResistorElectrons();
-      
+      else wrapResistorElectrons();      
     }
     else {
       if ((x+vx > sparkModel.maxWorldX) || (x+vx < sparkModel.minWorldX)) {
-//        var startPatches = sparkModel.conductors.where((p) => (p.x == sparkModel.minWorldX));
-//        // Pick a pseudorandom number according to the list length
-//        var n = Model.rnd.nextInt(startPatches.length - 1);
-//        sparkModel.sproutElectron(startPatches[n].x, startPatches[n].y);
-        //this.die();
         this.setHeading(Model.rnd.nextInt(360)); // a random heading, in radians
         
       }
-//      else if (x+vx < sparkModel.minWorldX) {
-//        var endPatches = sparkModel.conductors.where((p) => (p.x == sparkModel.maxWorldX));
-//        // Pick a pseudorandom number according to the list length
-//        var n = Model.rnd.nextInt(endPatches.length - 1);
-//        sparkModel.sproutElectron(endPatches[n].x, endPatches[n].y);
-//      }
-      setXY(x + vx, y + vy); // it is in the wire, so move it forward
+      setXY(x + vx, y + vy); // now the electron is in the wire, so move it forward
     }
-
   }
-  
+  /** draw the electrons on canvas
+   */   
   void draw(CanvasRenderingContext2D ctx) {
     ctx.fillStyle = "rgba(100, 100, 245, 255)";
     ctx.beginPath();
@@ -92,6 +83,9 @@ class Electron extends Turtle {
     ctx.stroke();
   }
   
+  /** finds if there is any ion nearby the electron
+  @return Ion
+  */  
   Ion ionHere() {
     for (Ion i in (model as SparkModel).ions) {
         num dist = (i.x - x) * (i.x - x) + (i.y - y) * (i.y - y);
@@ -104,6 +98,11 @@ class Electron extends Turtle {
     return null;
   }
   
+  /** calculates and returns the new heading after bouncing back from the ion
+  @param Electron e
+  @param Ion i
+  @return num heading
+  */   
   num bounceBackHeading(Electron e, Ion a) {
     var vectorA = [a.x - e.x, a.y - e.y];
     var vectorB = [cos(heading + PI / 2), sin(heading + PI / 2)];
@@ -116,19 +115,19 @@ class Electron extends Turtle {
     return (heading + PI - 2 * alfa); // this is the bounce back heading
   }
   
-  /*
+  /**
    * Set the heading
    @ gets heading in degrees and sets the electron's heading in radian
    */
   void setHeading(num degrees) {
     heading = (degrees / 180.0) * PI;
   }
-
-
   
+  /** wrap the electron to ensure that the electrons always move inside the conductor
+  @param Patch patchHere
+  @return void
+  */   
   void wrapWireElectrons(Patch patchHere) {
-//    if (p.y > 0) setXY(x, wrapY(y + model.worldHeight - sparkModel.diameter));
-//    else setXY(x, wrapY(y + model.worldHeight + sparkModel.diameter));
     if (patchHere.y > 0) setXY(x + vx, y + vy - sparkModel.diameter);
     else setXY(x + vx, y + vy + sparkModel.diameter);
   }
@@ -139,44 +138,10 @@ class Electron extends Turtle {
     vy = sparkModel.initE * sin(heading + PI/2);
     //move();
   }
-  /*
-  void wrapResistorElectrons(Patch patchHere) {
-    num d = sparkModel.diameter;
-    if (patchHere.region == "up" || patchHere.region == "down") {
-      if (patchHere.y >= 0 && patchHere.y < sparkModel.diameter) {
-        if (vx > 0) setXY(x + vx - d, y + vy);
-        else setXY(x +vx + d, y + vy);
-      }
-      else {
-        setHeading(Model.rnd.nextInt(360));
-        vx = sparkModel.initE * cos(heading + PI/2);
-        vy = sparkModel.initE * sin(heading + PI/2);
-        move();
-      }
-    }
-    else { // region is either top or bottom
-      int i = patchHere.x - sparkModel.minPatchX;
-      if (((i - start) % period >= 0 && (i - start) % period < diameter) 
-          || ((i - start) % period >= (diameter + 2) && (i - start) % period < (2 + 2 * diameter))) {
-        setHeading(Model.rnd.nextInt(360));
-        this.vx = sparkModel.initE * cos(this.heading + PI/2);
-        this.vy = sparkModel.initE * sin(this.heading + PI/2);
-        move();
-      }
-      else {
-        if (vy > 0) setXY(x + vx, y + vy - d);
-        else setXY(x + vx, y +vy + d);
-      }
-
-    }
-
-//      sparkModel.sproutElectron(tempP.x, tempP.y);
-//      sparkModel.turtles.remove(this);
-//      sparkModel.electrons.remove(this);
-//      this.die();
-  }
-*/ 
   
+  /** returns the distance between two turtles
+  @return double distance
+  */ 
   double distance(Turtle t1, Turtle t2) {
     return sqrt ((t1.x - t2.x) * (t1.x - t2.x) + (t1.y - t2.y) * (t1.y - t2.y));    
   }
