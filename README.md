@@ -1,4 +1,4 @@
 Spark Project
 ==============
 
-Agent-based circuit environment
+Agent-based electrical circuit environment
