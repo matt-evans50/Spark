@@ -27,12 +27,11 @@ class Bulb extends Component  {
   bool isOff;
   
   ImageElement onbulb = new ImageElement();
-  ImageElement coil = new ImageElement();
+
 
   Bulb(num x0, num y0, num x1, num y1, num r) : super("Bulb",x0, y0, x1, y1) {
     setImage("images/bulb-off.png");
     onbulb.src = "images/bulb-on.png";
-    coil.src = "images/coil.png";
     current = 0.0;
     resistance = 3.0;
     voltageDrop = 0.0;
@@ -42,9 +41,6 @@ class Bulb extends Component  {
     theApp.circuit.addNewBranch(this); 
     
   }
-  
-  //bool get isOn => img.src == "images/bulb-on.png";
-  //bool get isOff => img.src == "images/bulb-off.png";
   
   void turnOn() {
     //img.src = "images/bulb-on.png";
@@ -60,8 +56,6 @@ class Bulb extends Component  {
     iw = img.width / 2.2;
     ih = img.height / 2.2;
     
-    num coilW = coil.width / 6;
-    num coilH = coil.height / 6;
     ctx.drawImageScaled(img, -iw/2, -ih, iw, ih);
  
 //    ctx.globalAlpha = 0.8;
@@ -75,7 +69,6 @@ class Bulb extends Component  {
     }
     ctx.drawImageScaled(onbulb, -iw/2, -ih, iw, ih);
     ctx.globalAlpha = 1.0;
-    //ctx.drawImageScaled(coil, -coilW/2, -coilH - 3, coilW, coilH);
     return ctx;
     }
     

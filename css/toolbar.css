@@ -157,12 +157,3 @@ input::-webkit-slider-thumb {
    background: url("../images/buttons/light-bulb-off-big.png") 0 0 no-repeat;
 }
 /* #bulb-button:active { background-position: 3px 3px; } */
-
-/* BUTTONS FOR EDITION TOOLBAR */
-
-#grid-button {
-   background: url("../images/buttons/grid.png") 0 0 no-repeat;
-   width: 52px;
-   height: 52px;
-}
-#grid-button:active { background-position: 3px 3px; }

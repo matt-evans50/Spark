@@ -40,7 +40,7 @@ body {
 
 .close-button {
   -webkit-transform: rotate(360deg); /* Chrome & Safari */
-  background: url("../images/buttons/close-resized.png") 0 0 no-repeat;
+  background: url("../images/buttons/close.png") 0 0 no-repeat;
   width: 52px;
   height: 52px;
   border: none;
