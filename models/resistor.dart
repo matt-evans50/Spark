@@ -1,5 +1,25 @@
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+
 import 'dart:html';
-import 'dart:math';
 import 'NetTangoJS/core/ntango.dart';
 import 'core/spark.dart';
 import 'package:intl/intl.dart'; //this is for number format for AR tags
@@ -15,7 +35,6 @@ void main() {
   for (String param in list) {
     if (param.startsWith("v=")) {
       v = double.parse(param.substring(2));
-      //window.alert("Set voltage to v");
     }
     else if (param.startsWith("r=")) {
       r = double.parse(param.substring(2));
@@ -57,102 +76,67 @@ class ResistorModel extends SparkModel {
     //resistivity = resistance + 1; 
     diameter = 3;
     incE = 0.04;
-    /*
-    if (resistance < 2) {
-      diameter = 5;
-      incE = 0.03;
-    }
-    else if (resistance < 3) {
-      diameter = 3;
-      incE = 0.04;
-    }
-    else {
-      diameter = 2;
-      incE = 0.05;
-    }
-    */
-
     
     patchSize = 20;
     resize(width, height);
   }
   
   void setupPatches() {
-    /* initialize all patches as insulators */
-    /*
-    for (Patch patch in patches) {
-      patch.color.setColor(0, 114, 143, 255);
-      //patch.fieldDirection = -90.0;
-    }
-    */
-    
+    // initialize all patches as insulators     
     int start = 4;
     int distH = 6;
     int distW = 2;
     int period = 2 * (distW + diameter);
-    // define our conductor patches
+    
+    // define the conductor patches
     for (int i=0; i<worldWidth; i++) {
       Patch patch;
       int px = i + minPatchX;
       int py = -1 * diameter;
       
-      
-      // lead wire
+      // define the lead wire
       if (i < start - 1 || i > (worldWidth - 3)) { 
         for (int j = -2; j < diameter + 2; j++) {
           setupConductorPatch(px, py + j, -90.0, "bottom");
         }
       }  
-
       else if (i == start - 1) { 
         for (int j = 0; j < diameter; j++) {
           setupConductorPatch(px, py + j, -90.0, "bottom");
         }
       }    
-      
-      // up wires and part of top wire
+        
+      // define the up wires and part of top wire
       else if ((i - start) % period >= 0 && (i - start) % period < diameter) {
         for (py = -1 * diameter; py < distH; py++) {
           setupConductorPatch(px, py, 0.0, "up");
-          //Patch p = patchAt(px, py);
-          //p.color.setColor(0, 250, 0, 50);
         }
         for (py = distH; py < diameter + distH; py++) {
           setupConductorPatch(px, py, -90.0, "top");
-          //Patch p = patchAt(px, py);
-          //p.color.setColor(250,0, 0, 50);
         }
       }
       
-      // top wires
+      // define the top wires
       else if ((i - start) % period >= diameter && (i - start) % period < (diameter + distW)) {
         for (py = distH; py < diameter + distH; py++) {
-            setupConductorPatch(px, py, -90.0, "top");
-            //Patch p = patchAt(px, py);
-            //p.color.setColor(250, 0, 0, 50);                    
+            setupConductorPatch(px, py, -90.0, "top");                   
         }
       }
-      
-      // down wires
+        
+      // define the down wires
       else if ((i - start) % period >= (diameter + distW) && (i - start) % period < (distW + 2 * diameter)) {
         for (py = 0; py < diameter + distH; py++) {
-          setupConductorPatch(px, py, 180.0, "down");
-          //Patch p = patchAt(px, py);
-          //p.color.setColor(0, 0, 250, 50);       
+          setupConductorPatch(px, py, 180.0, "down");  
         } 
         for (py = -1 * diameter; py < 0; py++) {
-          setupConductorPatch(px, py, -90.0, "bottom");
-          //Patch p = patchAt(px, py);
-          //p.color.setColor(250, 0, 250, 50);       
+          setupConductorPatch(px, py, -90.0, "bottom"); 
         } 
       }
-      
-      // bottom wires
+        
+      // define the bottom wires
       else if ((i - start) % period >= (distW + 2 * diameter) && (i-start) % period < 2 * (distW + diameter)) {
         for (py = -1 * diameter; py < 0; py++) {
           setupConductorPatch(px, py, -90.0, "bottom");
-          //Patch p = patchAt(px, py);
-          //p.color.setColor(250, 0, 250, 50);
         }
       }
     }

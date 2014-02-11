@@ -1,26 +1,29 @@
+/*
+* Spark: Agent-based electrical circuit environment
+* Copyright (c) 2013 Elham Beheshti
+*
+*       Elham Beheshti (beheshti@u.northwestern.edu)
+*       Northwestern University, Evanston, IL
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License (version 2) as
+* published by the Free Software Foundation.
+*
+* This program is distributed in the hope that it will be useful, but
+* WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+* General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
 import 'dart:html';
-import 'dart:math';
 import 'NetTangoJS/core/ntango.dart';
 import 'core/spark.dart';
 import 'package:intl/intl.dart'; //this is for number format for AR tags
 
 void main() {
-//  WireModel model = new WireModel();
-//  model.restart();
-
-  /*
-  /* get the input values from the url */
-  String querystring = window.location.search.replaceFirst("?", "");
-  List<String> list = querystring.split("&");
-
-  for (String param in list) {
-    if (param.startsWith("v=")) {
-      model.voltage = double.parse(param.substring(2));
-      window.alert("Set voltage to ${model.voltage}");
-    }
-  }
-*/
-
   /* get the input values from the url */
   String querystring = window.location.search.replaceFirst("?", "");
   List<String> list = querystring.split("&");
@@ -31,7 +34,6 @@ void main() {
   for (String param in list) {
     if (param.startsWith("v=")) {
       v = double.parse(param.substring(2));
-      //window.alert("Set voltage to v");
     }
     else if (param.startsWith("r=")) {
       r = double.parse(param.substring(2));
@@ -55,7 +57,6 @@ void main() {
   p = document.querySelector("#resistance-value");
   p.text = "Resistance = ${rFormated}";
  
-  //v = 0.002; // input voltage
   WireModel model = new WireModel(v);
   model.restart();
   model.play(1);
@@ -80,18 +81,10 @@ class WireModel extends SparkModel {
     voltage = v * 10;
     patchSize = 20;
     resize(width, height);
-    //fullscreen();
   }
 
   void setupPatches(){
-    /* initialize all patches as insulators */
-    for (Patch patch in patches) {
-      //patch.color.setColor(255, 240, 245, 255);
-      //patch.color.setColor(0, 114, 143, 255);
-      //patch.color.setColor(155, 210, 155, 200); // to match the highlight color
-      //patch.fieldDirection= -90.0;
-    }
-    /* define our conductor patches */
+    // define the conductor patches
     for (int i=0; i<worldWidth; i++) {
       // the wire is "diameter" patches width
       for (int j=- (diameter ~/ 2 + 2); j < (1 + diameter ~/ 2 - 2); j++) {
@@ -100,7 +93,6 @@ class WireModel extends SparkModel {
         setupConductorPatch(px, py, 270, "bottom");
       }
     }
-
   }
   
   void sproutIons() {
@@ -110,10 +102,6 @@ class WireModel extends SparkModel {
         sproutIon(p.x, p.y);
       }
     }
-    /* random ions */
-//    List<Patch> shuffled = shuffle(conductors);
-//    shuffled = shuffled.sublist(0, number~/2);
-//    for (Patch p in shuffled) sproutIon(p.x, p.y);
   }
 
 }
