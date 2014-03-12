@@ -195,13 +195,11 @@ class App extends TouchManager {
       */
      
      ctx.strokeStyle = 'white';
-     ctx.lineWidth = 3;
-     ctx.fillStyle = "rgba(255,255,255,0)";
-     ctx.fillRect(containerBox.left, containerBox.top, containerBox.width, containerBox.height);
      ctx.lineWidth = 2;
      ctx.fillStyle = "rgba(255,255,255,0.2)";
      ctx.strokeRect(workingBox.left, workingBox.top, workingBox.width, workingBox.height);
      ctx.fillRect(workingBox.left, workingBox.top, workingBox.width, workingBox.height);
+
      /*
      if (this.gridsOn == true) {
        drawGrids (margin, margin, width - (3*margin), rect.top.toInt() - (2*margin));

@@ -50,8 +50,10 @@ abstract class SparkModel extends Model {
     clearTurtles();
     initPatches();
     setupPatches();
+    sproutIons();
   }
   
+  void sproutIons();
   void setupPatches();
   
   /** setup the conductor patches

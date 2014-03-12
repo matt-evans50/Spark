@@ -40,9 +40,11 @@ class Model {
   }
   
   void closeModel() {
+    IFrameElement frame = querySelector("div#model1 #model-frame");
+    frame.src = "";
     document.querySelector("#model1").style.display = "none";
     theApp.model1.component = null;
-    theApp.help.close();    
+    theApp.help.close();
   }
   
   void launchModel(Component c) {
@@ -53,12 +55,10 @@ class Model {
     String v = c.voltageDrop.toString();
     
     IFrameElement frame = document.querySelector("div#model1 #model-frame");
-//    if (c is Wire) frame.src = "models/wire.html?i=${i}&r=${r}&v=${v}";
-//    else frame.src = "models/resistor.html?i=${i}&r=${r}&v=${v}";
-    if (c is Wire) frame.src = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
-    else frame.src = "http://spark-project.appspot.com/Resistor?i=${i}&r=${r}&v=${v}";
-    //frame.src = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
-    
+    if (c is Wire) frame.src = "models/wire.html?i=${i}&r=${r}&v=${v}";
+    else frame.src = "models/resistor.html?i=${i}&r=${r}&v=${v}";
+//    if (c is Wire) frame.src = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
+//    else frame.src = "http://spark-project.appspot.com/Resistor?i=${i}&r=${r}&v=${v}";    
     document.querySelector("#model1").style.display = "block";
     theApp.help.initiate();
   }
@@ -76,10 +76,12 @@ class Model {
       IFrameElement frame = document.querySelector("div#model1 #model-frame");
       String frameSource;
       if (c is Wire) {
-        frameSource = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
+        //frameSource = "http://spark-project.appspot.com/Wire?i=${i}&r=${r}&v=${v}";
+        frameSource = "models/wire.html?i=${i}&r=${r}&v=${v}";
       }
       else { // resistor or bulb
-        frameSource = "http://spark-project.appspot.com/Resistor?i=${i}&r=${r}&v=${v}";
+        //frameSource = "http://spark-project.appspot.com/Resistor?i=${i}&r=${r}&v=${v}";
+        frameSource = "models/resistor.html?i=${i}&r=${r}&v=${v}";
       }
       print(frame.src);
       if (!frame.src.endsWith(frameSource)) frame.src = frameSource; // update only if it is updated!
